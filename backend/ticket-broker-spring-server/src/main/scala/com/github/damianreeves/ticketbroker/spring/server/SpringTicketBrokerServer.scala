@@ -16,5 +16,6 @@ object SpringTicketBrokerServer extends LazyLogging {
   def main(args: Array[String]): Unit = {
     new SpringApplicationBuilder(classOf[SpringTicketBrokerServer])
       .run(args:_*)
+    ()
   }
 }

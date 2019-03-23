@@ -12,3 +12,23 @@ dependencies {
   testRuntime(scalaDep("org.scala-lang.modules::scala-xml:1.1.0"))
 }
 
+tasks.withType<ScalaCompile> {
+  scalaCompileOptions.additionalParameters = listOf(
+    "-Xfatal-warnings",
+    "-target:jvm-1.8",
+    "-unchecked",
+    "-deprecation",
+    "-encoding", "UTF-8",
+    "-Xfuture",
+    "-Yno-adapted-args",
+    "-Ywarn-dead-code",
+    "-Ywarn-numeric-widen",
+    "-Ywarn-value-discard",
+    "-Ywarn-unused:imports,patvars,privates,locals,implicits",
+    "-feature",
+    "-language:implicitConversions",
+    "-language:higherKinds",
+    "-language:postfixOps",
+    "-Ypartial-unification"
+  )
+}
