@@ -1,7 +1,9 @@
 package com.github.damianreeves.ticketbroker.server
 
-object Server {
+import com.typesafe.scalalogging.LazyLogging
+
+object Server extends LazyLogging {
   def main(args: Array[String]): Unit = {
-    println("Hello from the Ticket Broker Server")
+    logger.info("Hello from the Ticket Broker Server")
   }
 }

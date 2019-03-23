@@ -1,8 +1,14 @@
 import org.gradle.api.Project
 
+fun String.asScalaDependency() = Deps.asScalaDependency(this)
+
+fun Project.scalalib(name:String) = "org.scala-lang:$name:$scalaVersion"
+fun Project.scalaDep(notation:String) = Deps.asScalaDependency(notation)
+
 val Project.scalaBaseVersion get() = Deps.scalaBaseVersion
 val Project.scalaVersion get() = Deps.scalaVersion
-fun String.asScalaDependency() = Deps.asScalaDependency(this)
+val Project.springBootVersion get() = Deps.springBootVersion
+
 
 object Deps {
 

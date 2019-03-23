@@ -1,3 +1,11 @@
+pluginManagement {
+  repositories {
+    mavenCentral()
+    gradlePluginPortal()
+    jcenter()
+  }
+}
+
 rootProject.name = "ticket-broker-app"
 
 include ("ticket-broker-common")
