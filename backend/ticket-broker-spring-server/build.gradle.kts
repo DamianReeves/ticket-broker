@@ -1,0 +1,4 @@
+plugins {
+  scala
+  `scala-convention`
+}
