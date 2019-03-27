@@ -8,4 +8,7 @@ object valuetypes {
     implicit def toString(eventId:EventId):String = eventId.value
   }
 
+  final case class EventSummary(name:String) {
+    override def toString: String = name
+  }
 }

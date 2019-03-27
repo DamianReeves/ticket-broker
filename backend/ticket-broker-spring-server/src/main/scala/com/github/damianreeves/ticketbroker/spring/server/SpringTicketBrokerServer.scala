@@ -6,9 +6,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.builder.SpringApplicationBuilder
 
 @SpringBootApplication
-class SpringTicketBrokerServer extends CommandLineRunner {
+class SpringTicketBrokerServer extends CommandLineRunner with LazyLogging {
   override def run(args: String*): Unit = {
-
+    logger.info("Running...")
   }
 }
 
