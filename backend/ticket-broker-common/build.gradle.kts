@@ -4,7 +4,7 @@ plugins {
 }
 
 dependencies {
-  implementation(scalaDep("org.scalaz::scalaz-zio:0.16"))
+  apiElements(scalaDep("org.scalaz::scalaz-zio:0.16"))
 
   implementation(scalaDep("com.sksamuel.avro4s::avro4s-kafka:2.0.4"))
   implementation(scalaDep("com.typesafe.scala-logging::scala-logging:3.9.2"))
