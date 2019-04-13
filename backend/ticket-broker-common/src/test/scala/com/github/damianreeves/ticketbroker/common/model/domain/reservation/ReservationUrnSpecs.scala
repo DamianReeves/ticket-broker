@@ -1,6 +1,6 @@
 package com.github.damianreeves.ticketbroker.common.model.domain.reservation
 
-import com.sksamuel.avro4s.SchemaFor
+import com.github.damianreeves.ticketbroker.common.model.domain.testing.AvroSupportFixture
 import com.typesafe.scalalogging.LazyLogging
 import org.apache.avro.Schema
 import org.junit.runner.RunWith
@@ -10,13 +10,10 @@ import org.scalatest.{FlatSpec, Matchers}
 import org.scalatest.junit.JUnitRunner
 
 @RunWith(classOf[JUnitRunner])
-class BulkReservationActivityIdSpecs extends FlatSpec with Matchers with PropertyChecks with LazyLogging {
-  behavior of "The BulkReservationActivityId type"
+class ReservationUrnSpecs extends FlatSpec with AvroSupportFixture with Matchers with PropertyChecks with LazyLogging {
+  behavior of "The ReservationUrn type"
 
   it should "support Avro schema generation" in {
-    val schema = SchemaFor[BulkReservationActivityId].schema
-
-    schema.getType shouldBe Schema.Type.UNION
-    logger.info(s"Schema: ${schema.toString(true)}")
+    shouldGenerateAvroSchemaOfType[ReservationUrn](Schema.Type.RECORD)
   }
 }

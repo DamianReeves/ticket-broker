@@ -1,21 +1,21 @@
 package com.github.damianreeves.ticketbroker.common.model.domain.reservation.testing
 
-import com.github.damianreeves.ticketbroker.common.model.domain.reservation.{Request, ReservationRequestId}
+import com.github.damianreeves.ticketbroker.common.model.domain.reservation.{Reservation, ReservationUrn}
 
 final case class TestReservationDataStoreState(
-  findRequests:List[ReservationRequestId],
-  saveRequests:List[Request],
-  data:Map[ReservationRequestId, Request]
+  findRequests:List[ReservationUrn],
+  saveRequests:List[Reservation],
+  data:Map[ReservationUrn, Reservation]
 ) {
 
-  def addFindRequest(id:ReservationRequestId):TestReservationDataStoreState =
-    copy(findRequests = id::findRequests)
+  def addFindRequest(urn:ReservationUrn):TestReservationDataStoreState =
+    copy(findRequests = urn::findRequests)
 
-  def addSaveRequest(request:Request):TestReservationDataStoreState =
-    copy(saveRequests = request::saveRequests)
+  def addSaveRequest(reservation: Reservation):TestReservationDataStoreState =
+    copy(saveRequests = reservation::saveRequests)
 
-  def doSaveRequest(request:Request):TestReservationDataStoreState =
-    copy(data = data + (request.id -> request))
+  def doSaveRequest(reservation: Reservation):TestReservationDataStoreState =
+    copy(data = data + (reservation.urn -> reservation))
 }
 
 

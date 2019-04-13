@@ -8,8 +8,8 @@ trait ReservationDataStore {
 
 object ReservationDataStore {
   trait Service {
-    def findRequest(id:ReservationRequestId):Task[Option[Request]]
-    def saveRequest(request:Request):Task[Unit]
+    def findReservation(urn:ReservationUrn):Task[Option[Reservation]]
+    def saveReservation(reservation:Reservation):Task[Unit]
   }
 }
 

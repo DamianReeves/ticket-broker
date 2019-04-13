@@ -6,6 +6,7 @@ plugins {
 
 dependencies {
   implementation(scalalib("scala-library"))
+  implementation(scalalib("scala-reflect"))
 
   testImplementation("junit:junit:4.12")
   testImplementation(scalaDep("org.scalatest::scalatest:3.0.5"))
