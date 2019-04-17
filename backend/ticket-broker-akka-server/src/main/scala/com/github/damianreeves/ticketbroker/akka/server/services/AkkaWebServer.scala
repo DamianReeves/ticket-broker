@@ -9,6 +9,7 @@ import com.github.damianreeves.ticketbroker.common.config.Configuration
 import com.github.damianreeves.ticketbroker.common.config.Configuration.WebConfig
 import com.github.damianreeves.ticketbroker.common.services.WebServer
 import com.github.damianreeves.ticketbroker.common.services.WebServer.WebServerRef
+import com.typesafe.scalalogging.LazyLogging
 import scalaz.zio.{Task, ZIO}
 
 import scala.concurrent.ExecutionContextExecutor
@@ -25,13 +26,19 @@ object AkkaWebServer {
   def apply(routes: Route)(implicit system: ActorSystem, materializer: ActorMaterializer) =
     new AkkaWebServer(routes, system, materializer)
 
-  private class LiveService(routes:Route, actorSystem: ActorSystem, actorMaterializer: ActorMaterializer) extends WebServer.Service {
+  private class LiveService(routes:Route, actorSystem: ActorSystem, actorMaterializer: ActorMaterializer)
+    extends WebServer.Service
+    with LazyLogging {
     implicit val system:ActorSystem = actorSystem
     implicit val materializer:ActorMaterializer = actorMaterializer
     implicit val executionContext: ExecutionContextExecutor = system.dispatcher
 
-    override def start(webConfig: Configuration.WebConfig): Task[WebServer.WebServerRef] =
-      bindAndHandle(webConfig)
+    override def start(webConfig: Configuration.WebConfig): Task[WebServer.WebServerRef] = for {
+      _ <- ZIO.succeed { logger.info(s"Starting web server on host: ${webConfig.hostname} and port: ${webConfig.port}") }
+      ref <- bindAndHandle(webConfig)
+      _ <- ZIO.succeed { logger.info(s"Now serving requests on host: ${webConfig.hostname} and port: ${webConfig.port}") }
+    } yield ref
+
 
     override def stop(webServerRef: WebServer.WebServerRef): ZIO[Any, Nothing, Unit] =
       webServerRef.shutdownHook

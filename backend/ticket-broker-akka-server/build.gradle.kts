@@ -13,5 +13,6 @@ dependencies {
   compile(scalaDep("com.typesafe.akka::akka-stream".withVersion(project.akkaVersion)))
   compile(scalaDep("com.typesafe.akka::akka-actor-typed".withVersion(project.akkaVersion)))
   compile(scalaDep("com.lightbend.akka::alpakka:1.0-M2"))
+  compile("ch.qos.logback:logback-classic:1.2.3")
 }
 

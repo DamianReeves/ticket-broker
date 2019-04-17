@@ -2,7 +2,7 @@ package com.github.damianreeves.ticketbroker.common.services
 
 import com.github.damianreeves.ticketbroker.common.config.Configuration
 import com.github.damianreeves.ticketbroker.common.services.ProfileManager.ActiveProfiles
-import com.typesafe.config.Config
+import com.typesafe.config.{Config, ConfigFactory}
 import scalaz.zio.{Task, ZIO}
 
 object ConfigProvider {
@@ -28,6 +28,14 @@ object ConfigProvider {
     def loadConfiguration(activeProfiles:ActiveProfiles):ZIO[ConfigProvider, Throwable, Configuration] =
       ZIO.accessM(_.configProvider.loadConfiguration(activeProfiles))
   }
+
+  trait Live extends ConfigProvider {
+    override def configProvider: Service = (activeProfiles: ActiveProfiles) => ZIO {
+      ConfigFactory.load()
+    }
+  }
+
+  object Live extends Live
 }
 
 trait ConfigProvider {
