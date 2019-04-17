@@ -1,4 +1,4 @@
-package com.github.damianreeves.ticketbroker.common.model.domain.testing
+package com.github.damianreeves.ticketbroker.common.testing
 
 import scala.reflect.ClassTag
 import com.sksamuel.avro4s.{Decoder, Encoder, SchemaFor}

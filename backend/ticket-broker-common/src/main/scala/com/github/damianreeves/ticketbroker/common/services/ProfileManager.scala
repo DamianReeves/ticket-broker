@@ -9,7 +9,7 @@ object ProfileManager {
   object ProfileName {
     val default = ProfileName("default")
   }
-  final case class Profile(name:ProfileName, priority:Int) extends Ordered[Profile] {
+  final case class Profile(name:ProfileName, priority:Int = 0) extends Ordered[Profile] {
     override def compare(that: Profile): Int = {
       if (this.priority == that.priority) 0
       else if (this.priority > that.priority) 1
@@ -18,6 +18,8 @@ object ProfileManager {
   }
   object Profile {
     val default = Profile(ProfileName.default, Int.MinValue)
+    def create(profile:String, priority:Int=0): Profile =
+      new Profile(ProfileName(profile), priority)
   }
   final case class ActiveProfiles(profiles:SortedSet[Profile]) {
     def names: collection.Set[ProfileName] = profiles.map(_.name)

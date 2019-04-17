@@ -1,6 +1,6 @@
 package com.github.damianreeves.ticketbroker.common.model.domain.reservation
 
-import com.github.damianreeves.ticketbroker.common.model.domain.testing.AvroSupportFixture
+import com.github.damianreeves.ticketbroker.common.testing.AvroSupportFixture
 import com.typesafe.scalalogging.LazyLogging
 import org.apache.avro.Schema
 import org.junit.runner.RunWith
