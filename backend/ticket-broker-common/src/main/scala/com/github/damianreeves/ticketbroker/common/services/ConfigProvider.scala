@@ -3,6 +3,7 @@ package com.github.damianreeves.ticketbroker.common.services
 import com.github.damianreeves.ticketbroker.common.config.Configuration
 import com.github.damianreeves.ticketbroker.common.services.ProfileManager.ActiveProfiles
 import com.typesafe.config.{Config, ConfigFactory}
+import com.typesafe.scalalogging.LazyLogging
 import scalaz.zio.{Task, ZIO}
 
 object ConfigProvider {
@@ -29,10 +30,11 @@ object ConfigProvider {
       ZIO.accessM(_.configProvider.loadConfiguration(activeProfiles))
   }
 
-  trait Live extends ConfigProvider {
-    override def configProvider: Service = (activeProfiles: ActiveProfiles) => ZIO {
-      ConfigFactory.load()
-    }
+  trait Live extends ConfigProvider with LazyLogging {
+    override def configProvider: Service = (activeProfiles: ActiveProfiles) => for {
+      _ <- ZIO.succeed { logger.info(s"Loading config for profiles: ${activeProfiles.displayText}")}
+      config <- ZIO{ConfigFactory.load()}
+    } yield config
   }
 
   object Live extends Live
