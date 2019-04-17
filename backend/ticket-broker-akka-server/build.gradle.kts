@@ -9,6 +9,8 @@ dependencies {
   implementation(scalaDep("com.typesafe.scala-logging::scala-logging:3.9.2"))
   implementation(scalaDep("org.scalaz::scalaz-zio-interop-cats".withVersion(project.zioVersion)))
   implementation(scalaDep("org.scalaz::scalaz-zio-interop-future".withVersion(project.zioVersion)))
+  compile(scalaDep("com.typesafe.akka::akka-http".withVersion("10.1.8")))
+  compile(scalaDep("com.typesafe.akka::akka-stream".withVersion(project.akkaVersion)))
   compile(scalaDep("com.typesafe.akka::akka-actor-typed".withVersion(project.akkaVersion)))
   compile(scalaDep("com.lightbend.akka::alpakka:1.0-M2"))
 }

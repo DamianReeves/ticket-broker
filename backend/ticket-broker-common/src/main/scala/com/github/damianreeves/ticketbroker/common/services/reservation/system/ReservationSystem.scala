@@ -1,4 +1,4 @@
-package com.github.damianreeves.ticketbroker.common.services.reservations.system
+package com.github.damianreeves.ticketbroker.common.services.reservation.system
 
 object ReservationSystem {
   trait Service {
