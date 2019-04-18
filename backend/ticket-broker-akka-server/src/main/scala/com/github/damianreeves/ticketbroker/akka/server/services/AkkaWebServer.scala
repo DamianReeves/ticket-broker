@@ -18,7 +18,7 @@ import scala.concurrent.duration._
 class AkkaWebServer(routes:Route, system: ActorSystem, materializer: ActorMaterializer) extends WebServer {
 
   override val webServer: WebServer.Service =
-    new services.AkkaWebServer.LiveService(routes, system, materializer)
+    new services.AkkaWebServer.WebServerLive(routes, system, materializer)
 }
 
 object AkkaWebServer {
@@ -26,7 +26,7 @@ object AkkaWebServer {
   def apply(routes: Route)(implicit system: ActorSystem, materializer: ActorMaterializer) =
     new AkkaWebServer(routes, system, materializer)
 
-  private class LiveService(routes:Route, actorSystem: ActorSystem, actorMaterializer: ActorMaterializer)
+  private class WebServerLive(routes:Route, actorSystem: ActorSystem, actorMaterializer: ActorMaterializer)
     extends WebServer.Service
     with LazyLogging {
     implicit val system:ActorSystem = actorSystem
