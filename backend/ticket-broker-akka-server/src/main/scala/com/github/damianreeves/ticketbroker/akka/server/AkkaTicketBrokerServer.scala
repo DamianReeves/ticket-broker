@@ -40,6 +40,7 @@ object AkkaTicketBrokerServer extends App with LazyLogging {
     import akka.http.scaladsl.server.Directives._
 
     ZIO.succeed {
+        ReservationHttpService().route ~
         AdminHttpService().route ~
         HomeHttpService().route ~
         SwaggerDocService(webConfig.hostname, webConfig.port).routes

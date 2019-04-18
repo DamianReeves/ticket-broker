@@ -37,3 +37,5 @@ class AdminHttpService extends ApiService("admin", "admin") {
 object AdminHttpService {
   def apply(): AdminHttpService = new AdminHttpService()
 }
+
+

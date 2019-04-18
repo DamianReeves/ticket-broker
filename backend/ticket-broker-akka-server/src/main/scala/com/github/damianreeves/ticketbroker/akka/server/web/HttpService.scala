@@ -4,8 +4,9 @@ import akka.http.scaladsl.model._
 import akka.http.scaladsl.server.{Directives, ExceptionHandler, Route}
 import com.typesafe.scalalogging.LazyLogging
 import StatusCodes._
+import de.heikoseeberger.akkahttpavro4s.AvroSupport
 
-trait HttpService extends Directives with LazyLogging  {
+trait HttpService extends Directives with AvroSupport with LazyLogging  {
   val serviceName:String
   val servicePrefix:String = serviceName
 
