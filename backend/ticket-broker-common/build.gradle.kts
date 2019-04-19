@@ -10,6 +10,7 @@ dependencies {
   compile(scalaDep("com.typesafe.scala-logging::scala-logging:3.9.2"))
   compile(scalaDep("com.github.pureconfig::pureconfig:0.10.2"))
   compile("org.rocksdb:rocksdbjni:5.17.2")
+  compile(scalaDep("com.github.pshirshov.izumi.r2::logstage-zio:0.7.0"))
   
   implementation(scalaDep("org.scalaz::scalaz-zio-interop-cats".withVersion(project.zioVersion)))
   implementation(scalaDep("org.scalaz::scalaz-zio-interop-future".withVersion(project.zioVersion)))

@@ -5,7 +5,7 @@ import java.time.LocalDateTime
 import akka.http.scaladsl.model._
 import akka.http.scaladsl.server.Route
 import com.github.damianreeves.ticketbroker.akka.server.web.HttpService.ApiService
-import javax.ws.rs.Path
+import javax.ws.rs.{GET, Path}
 
 @Path("/admin")
 class AdminHttpService extends ApiService("admin", "admin") {
@@ -23,6 +23,7 @@ class AdminHttpService extends ApiService("admin", "admin") {
     }
   }
 
+  @GET
   def index: Route = pathEndOrSingleSlash {
     get {
       complete(HttpEntity(ContentTypes.`text/html(UTF-8)`,

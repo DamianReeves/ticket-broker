@@ -5,6 +5,8 @@ import com.github.swagger.akka.model.Info
 
 class SwaggerDocService(hostname:String, port:Int) extends SwaggerHttpService{
   override val apiClasses: Set[Class[_]] = Set(
+    classOf[ReservationHttpService],
+    classOf[EventHttpService],
     classOf[HomeHttpService],
     classOf[AdminHttpService]
   )

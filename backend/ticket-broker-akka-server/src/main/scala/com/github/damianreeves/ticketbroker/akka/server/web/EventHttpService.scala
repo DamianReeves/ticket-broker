@@ -5,19 +5,20 @@ import akka.http.scaladsl.server.Route
 import com.github.damianreeves.ticketbroker.akka.server.web.HttpService.ApiService
 import javax.ws.rs.{GET, Path}
 
-@Path("/reservation")
-class ReservationHttpService extends ApiService("reservation", "reservation") {
+@Path(value="/event")
+class EventHttpService extends ApiService("event", "event") {
 
   @GET
-  def index: Route = pathEndOrSingleSlash {
+  def index:Route = {
     get {
       complete(HttpEntity(ContentTypes.`text/html(UTF-8)`,
-        """<h1>Ticket Broker - Reservations</h1>"""))
+        """<h1>Ticket Broker - Events</h1>"""))
     }
   }
-  override def myRoutes: Route = index
+
+  val myRoutes:Route = index
 }
 
-object ReservationHttpService {
-  def apply(): ReservationHttpService = new ReservationHttpService()
+object EventHttpService {
+  def apply(): EventHttpService = new EventHttpService
 }
