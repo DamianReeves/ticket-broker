@@ -8,6 +8,7 @@ import org.scalatest.junit.JUnitRunner
 
 @RunWith(classOf[JUnitRunner])
 class ProfileManagerSpecs extends BddSpec with LazyLogging {
+  import org.scalacheck.ScalacheckShapeless._
   behavior of "Profile"
 
   it should "be constructable only from a name" in {

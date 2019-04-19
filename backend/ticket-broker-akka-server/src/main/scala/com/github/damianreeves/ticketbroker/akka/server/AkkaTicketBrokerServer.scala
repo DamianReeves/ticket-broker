@@ -35,7 +35,7 @@ object AkkaTicketBrokerServer extends App with LazyLogging {
   } yield 0
 
 
-  private def routes(webConfig: WebConfig): UIO[Route] = {
+  private def routes(webConfig: WebConfig)(implicit system: ActorSystem): UIO[Route] = {
     import com.github.damianreeves.ticketbroker.akka.server.web._
     import akka.http.scaladsl.server.Directives._
 
@@ -43,7 +43,9 @@ object AkkaTicketBrokerServer extends App with LazyLogging {
         ReservationHttpService().route ~
         AdminHttpService().route ~
         HomeHttpService().route ~
-        SwaggerDocService(webConfig.hostname, webConfig.port).routes
+        EventHttpService().route ~
+        SwaggerDocService(webConfig.hostname, webConfig.port).routes ~
+        SwaggerUISite.route
     }
   }
 
