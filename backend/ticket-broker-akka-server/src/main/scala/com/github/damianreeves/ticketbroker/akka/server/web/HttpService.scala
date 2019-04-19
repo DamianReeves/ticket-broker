@@ -4,9 +4,12 @@ import akka.http.scaladsl.model._
 import akka.http.scaladsl.server.{Directives, ExceptionHandler, Route}
 import com.typesafe.scalalogging.LazyLogging
 import StatusCodes._
-import de.heikoseeberger.akkahttpavro4s.AvroSupport
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.datatype.jdk8.Jdk8Module
+import com.fasterxml.jackson.module.scala.DefaultScalaModule
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 
-trait HttpService extends Directives with AvroSupport with LazyLogging  {
+trait HttpService extends Directives with LazyLogging  {
   val serviceName:String
   val servicePrefix:String = serviceName
 
@@ -34,6 +37,15 @@ trait HttpService extends Directives with AvroSupport with LazyLogging  {
 }
 
 object HttpService {
+
+  implicit val defaultObjectMapper: ObjectMapper = {
+    new ObjectMapper()
+      .registerModule(DefaultScalaModule)
+      .registerModule(new JavaTimeModule())
+      .registerModule(new Jdk8Module())
+      .findAndRegisterModules()
+  }
+
   abstract class ApiService(name:String, prefix:String = null) extends HttpService {
     override val serviceName: String = name
     override val servicePrefix: String = Option(prefix) match {

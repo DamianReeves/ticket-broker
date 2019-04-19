@@ -1,13 +1,8 @@
 package com.github.damianreeves.ticketbroker.common.model.dto
 
 
-import java.time.Instant
+import java.time.{Instant, ZonedDateTime}
 
-import com.sksamuel.avro4s.{FromRecord, SchemaFor, ToRecord}
+import com.github.damianreeves.ticketbroker.common.model.domain.events.valuetypes.EventTitle
 
-case class EventDto(title:String, startTime:Instant, endTime:Instant)
-object EventDto {
-  implicit val eventDtoSchemaFor:SchemaFor[EventDto] = SchemaFor[EventDto]
-  implicit val eventDtoToRecord:ToRecord[EventDto] = ToRecord[EventDto]
-  implicit val eventDtoFromRecord:FromRecord[EventDto] = FromRecord[EventDto]
-}
+case class EventDto(title:EventTitle, startTime:Instant, endTime:ZonedDateTime)

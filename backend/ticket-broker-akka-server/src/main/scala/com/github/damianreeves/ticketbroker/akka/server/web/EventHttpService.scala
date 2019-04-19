@@ -1,18 +1,20 @@
 package com.github.damianreeves.ticketbroker.akka.server.web
 
-import java.time.{LocalDateTime, ZoneOffset}
+import java.time.{LocalDateTime, ZoneId, ZoneOffset, ZonedDateTime}
 
 import akka.actor.ActorSystem
-import akka.http.scaladsl.marshalling.Marshal
-import akka.http.scaladsl.model.{ContentTypes, HttpEntity, MessageEntity}
+import akka.http.scaladsl.model.{ContentTypes, HttpEntity}
 import akka.http.scaladsl.server.Route
 import com.github.damianreeves.ticketbroker.akka.server.web.HttpService.ApiService
+import com.github.damianreeves.ticketbroker.common.model.domain.events.valuetypes.EventTitle
 import com.github.damianreeves.ticketbroker.common.model.dto.EventDto
 import io.swagger.v3.oas.annotations.enums.ParameterIn
 import io.swagger.v3.oas.annotations.{Operation, Parameter}
 import io.swagger.v3.oas.annotations.media.{Content, Schema}
 import io.swagger.v3.oas.annotations.responses.ApiResponse
 import javax.ws.rs.{GET, Path}
+import de.heikoseeberger.akkahttpjackson.JacksonSupport._
+import HttpService.defaultObjectMapper
 
 import scala.concurrent.ExecutionContextExecutor
 
@@ -44,12 +46,11 @@ class EventHttpService(implicit system:ActorSystem) extends ApiService("event", 
     get {
       logger.info(s"Route hit => getById($id)")
       val event = EventDto (
-        "New Years Eve",
+        EventTitle("New Years Eve"),
         LocalDateTime.of(2019,12,31,20,0,0).toInstant(ZoneOffset.UTC),
-        LocalDateTime.of(2020,1,1,0,30,0).toInstant(ZoneOffset.UTC)
+        ZonedDateTime.of(LocalDateTime.of(2020,1,1,0,30,0), ZoneId.of("UTC"))
       )
-      val response = Marshal(event).to[MessageEntity]
-      complete(response)
+      complete(event)
     }
   }
 

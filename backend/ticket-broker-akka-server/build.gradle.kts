@@ -21,5 +21,7 @@ dependencies {
   compile(scalaDep("com.github.alexarchambault::case-app:1.2.0"))
   compile("ch.qos.logback:logback-classic:1.2.3")
   compile("javax.ws.rs:javax.ws.rs-api:2.0.1")
+  compile("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.8")
+  compile("com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.9.8")
 }
 
